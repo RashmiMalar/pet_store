@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Chewy Bone",
+    "price": "200",
+    "description": "Durable chew toy for dogs.",
+    "images": [{ "image": "chewy_bone.jpg" }],
+    "category": "Toys",
+    "seller": "Pawfect Supplies",
+    "stock": "50",
+    "createdAt": "2025-04-14T10:30:00Z"
+  },
+  {
+    "name": "Premium Cat Food",
+    "price": "500",
+    "description": "Rich in proteins and nutrients.",
+    "images": [{ "image": "cat_food.jpg" }],
+    "category": "Food",
+    "seller": "Healthy Paws",
+    "stock": "30",
+    "createdAt": "2025-04-13T12:00:00Z"
+  },
+  {
+    "name": "Bird Swing",
+    "price": "300",
+    "description": "Perfect for parrots and small birds.",
+    "images": [{ "image": "bird_swing.jpg" }],
+    "category": "Accessories",
+    "seller": "Feathered Friends",
+    "stock": "20",
+    "createdAt": "2025-04-12T09:00:00Z"
+  },
+  {
+    "name": "Aquarium Gravel",
+    "price": "150",
+    "description": "Decorative and fish-safe gravel.",
+    "images": [{ "image": "aquarium_gravel.jpg" }],
+    "category": "Aquariums",
+    "seller": "Aqua Supplies",
+    "stock": "100",
+    "createdAt": "2025-04-15T11:00:00Z"
+  },
+  {
+    "name": "Rabbit Hutch",
+    "price": "2500",
+    "description": "Spacious and sturdy hutch for rabbits.",
+    "images": [{ "image": "rabbit_hutch.jpg" }],
+    "category": "Housing",
+    "seller": "Happy Paws Homes",
+    "stock": "10",
+    "createdAt": "2025-04-10T15:30:00Z"
+  },
+  {
+    "name": "Reptile Heat Lamp",
+    "price": "800",
+    "description": "Provides essential warmth for reptiles.",
+    "images": [{ "image": "heat_lamp.jpg" }],
+    "category": "Accessories",
+    "seller": "Reptile World",
+    "stock": "25",
+    "createdAt": "2025-04-08T13:00:00Z"
+  },
+  {
+    "name": "Dog Collar",
+    "price": "350",
+    "description": "Adjustable and comfortable collar.",
+    "images": [{ "image": "dog_collar.jpg" }],
+    "category": "Accessories",
+    "seller": "Pawfect Supplies",
+    "stock": "75",
+    "createdAt": "2025-04-14T16:00:00Z"
+  },
+  {
+    "name": "Cat Scratching Post",
+    "price": "1200",
+    "description": "Durable scratching post for cats.",
+    "images": [{ "image": "scratching_post.jpg" }],
+    "category": "Toys",
+    "seller": "Whisker Wonderland",
+    "stock": "40",
+    "createdAt": "2025-04-09T14:00:00Z"
+  },
+  {
+    "name": "Hamster Wheel",
+    "price": "400",
+    "description": "Silent and smooth-running wheel.",
+    "images": [{ "image": "hamster_wheel.jpg" }],
+    "category": "Toys",
+    "seller": "Tiny Paws Supplies",
+    "stock": "60",
+    "createdAt": "2025-04-11T17:00:00Z"
+  },
+  {
+    "name": "Goldfish Food",
+    "price": "100",
+    "description": "Specially formulated for goldfish.",
+    "images": [{ "image": "goldfish_food.jpg" }],
+    "category": "Food",
+    "seller": "Aqua Supplies",
+    "stock": "200",
+    "createdAt": "2025-04-13T18:00:00Z"
+  }
+]
