@@ -36,38 +36,35 @@ This is a full-stack e-commerce web application for a pet store built using **An
 
 ---
 ## 📁 Project Structure
-
 project-root/
-├── backend/                    # Node.js backend server
-│   ├── config/                 # Database configuration and environment settings
-│   ├── controllers/           # Logic to handle requests and responses
-│   ├── models/                # Mongoose models (schemas)
-│   ├── routes/                # API route definitions
-│   ├── app.js                 # Main backend entry point
-│   ├── package.json           # Backend dependencies and scripts
-│   └── package-lock.json
+├── backend/ # Node.js backend server
+│ ├── config/ # DB config & environment variables
+│ ├── controllers/ # Logic to handle requests/responses
+│ ├── models/ # Mongoose models (schemas)
+│ ├── routes/ # API route definitions
+│ ├── app.js # Main backend entry point
+│ ├── package.json # Backend dependencies
 │
-├── frontend/                  # Angular frontend application
-│   ├── .angular/              # Angular internal settings
-│   ├── .vscode/               # VS Code workspace settings
-│   ├── node_modules/          # Frontend dependencies
-│   ├── public/                # Public assets (if any)
-│   └── src/
-│       ├── app/               # Angular components and services
-│       │   ├── admin-panel/   # Admin features (e.g., product management)
-│       │   ├── cart/          # Cart component and logic
-│       │   ├── checkout/      # Checkout functionality
-│       │   ├── guards/        # Route guards (e.g., auth protection)
-│       │   ├── home/          # Homepage UI and logic
-│       │   ├── order-history/ # Display past orders
-│       │   ├── pages/         # Common or shared pages
-│       │   ├── product-list/  # Product listing component
-│       │   ├── profile/       # User profile component
-│       │   ├── api.service.ts         # API service for backend communication
-│       │   ├── api.service.spec.ts    # Test file for API service
-│       │   ├── app.component.html     # Main component HTML
-│       │   └── app.component.css      # Styling for main component
+├── frontend/ # Angular frontend application
+│ ├── .angular/ # Angular internal settings
+│ ├── .vscode/ # VS Code workspace settings
+│ ├── node_modules/ # Frontend dependencies
+│ ├── public/ # Static assets
+│ └── src/
+│ ├── app/ # Angular components and services
+│ │ ├── admin-panel/ # Admin features (product mgmt)
+│ │ ├── cart/ # Cart component
+│ │ ├── checkout/ # Checkout process
+│ │ ├── guards/ # Route guards (auth etc.)
+│ │ ├── home/ # Homepage UI
+│ │ ├── order-history/ # Past orders
+│ │ ├── pages/ # Shared/common pages
+│ │ ├── product-list/ # Product listings
+│ │ ├── profile/ # User profile
+│ │ ├── api.service.ts # API integration
+│ │ ├── api.service.spec.ts # API test
+│ │ ├── app.component.html # Main HTML
+│ │ ├── app.component.css # Main styling
 │
-├── README.md                  # Project documentation
-└── .gitignore                 # Files to ignore in git
-
+├── README.md # Project documentation
+└── .gitignore # Git ignored files
