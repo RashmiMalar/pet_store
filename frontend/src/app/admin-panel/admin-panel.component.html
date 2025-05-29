@@ -1,0 +1,195 @@
+<div class="admin-panel">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3 class="sidebar-title">Admin Panel</h3>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'dashboard'" (click)="setActiveTab('dashboard')">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'products'" (click)="setActiveTab('products')">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'orders'" (click)="setActiveTab('orders')">Orders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link logout-link" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Dashboard Tab -->
+    <div *ngIf="activeTab === 'dashboard'" class="dashboard">
+      <div class="glass-card">
+        <h1>Welcome to the Admin Dashboard</h1>
+        <p>Manage your products and orders efficiently from here.</p>
+      </div>
+    </div>
+
+    <!-- Products Tab -->
+    <div *ngIf="activeTab === 'products'" class="container py-4">
+      <h2 class="mb-4 text-center">Product Management</h2>
+
+      <!-- Alerts -->
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ successMessage }}
+        <button type="button" class="btn-close" (click)="successMessage = null" aria-label="Close"></button>
+      </div>
+      <div *ngIf="productsErrorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ productsErrorMessage }}
+        <button type="button" class="btn-close" (click)="productsErrorMessage = null" aria-label="Close"></button>
+      </div>
+
+      <!-- Search -->
+      <div class="mb-4">
+        <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="filterProducts()"
+          placeholder="Search products..." />
+      </div>
+
+      <!-- Product Form -->
+      <form #productForm="ngForm" (ngSubmit)="onSubmit()" class="row g-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="name" [(ngModel)]="formData.name" placeholder="Product Name"
+            required />
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="category" [(ngModel)]="formData.category" placeholder="Category"
+            required />
+        </div>
+        <div class="col-md-6">
+          <input type="number" class="form-control" name="price" [(ngModel)]="formData.price" placeholder="Price"
+            required />
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="seller" [(ngModel)]="formData.seller" placeholder="Seller"
+            required />
+        </div>
+        <div class="col-md-6">
+          <input type="number" class="form-control" name="stock" [(ngModel)]="formData.stock" placeholder="Stock"
+            required />
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="description" [(ngModel)]="formData.description"
+            placeholder="Description" />
+        </div>
+
+        <!-- File input -->
+        <div class="col-md-6">
+          <input type="file" class="form-control" name="image" (change)="onFileSelected($event)" accept="image/*" />
+        </div>
+
+        <!-- Image Preview -->
+        <div *ngIf="previewImage" class="col-md-6 text-center">
+          <img [src]="previewImage" alt="Preview" class="img-thumbnail" width="120" />
+        </div>
+
+        <!-- Actions -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-success me-2">
+            {{ editMode ? 'Update Product' : 'Add Product' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">Clear</button>
+        </div>
+      </form>
+
+      <hr class="my-4" />
+
+      <!-- Product Table -->
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price (₹)</th>
+              <th>Seller</th>
+              <th>Stock</th>
+              <th>Image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of filteredProducts">
+              <td>{{ product.name }}</td>
+              <td>{{ product.category }}</td>
+              <td>₹{{ product.price }}</td>
+              <td>{{ product.seller }}</td>
+              <td>{{ product.stock }}</td>
+              <td>
+                <img *ngIf="product.images?.[0]?.image?.data"
+                  [src]="'data:image/jpeg;base64,' + (product.images[0].image.data! | base64)" alt="{{ product.name }}"
+                  class="img-thumbnail" width="60" />
+                <span *ngIf="!product.images?.[0]?.image?.data">No Image</span>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-primary me-2" (click)="editProduct(product)">Edit</button>
+                <button class="btn btn-sm btn-danger" (click)="deleteProduct(product._id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Orders Tab -->
+    <div *ngIf="activeTab === 'orders'" class="container py-4">
+      <h2 class="mb-4 text-center">Orders Management</h2>
+
+      <!-- Alerts -->
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ successMessage }}
+        <button type="button" class="btn-close" (click)="successMessage = null" aria-label="Close"></button>
+      </div>
+      <div *ngIf="ordersErrorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ ordersErrorMessage }}
+        <button type="button" class="btn-close" (click)="ordersErrorMessage = null" aria-label="Close"></button>
+      </div>
+
+      <!-- Search -->
+      <div class="mb-4">
+        <input type="text" class="form-control" [(ngModel)]="searchTermOrders" (input)="filterOrders()"
+          placeholder="Search orders by status..." />
+      </div>
+
+      <!-- Orders Table -->
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>Order ID</th>
+              <th>Cart Items</th>
+              <th>Amount (₹)</th>
+              <th>Status</th>
+              <th>Created At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of filteredOrders">
+              <td>{{ order.orderNumber || 'N/A' }}</td>
+              <td>{{ getCartItemsNames(order) }}</td>
+              <td>₹{{ calculateOrderAmount(order) }}</td>
+              <td>
+                <select class="form-control status-select" [(ngModel)]="order.status" [name]="'status-' + order._id"
+                  (change)="onStatusChange(order)">
+                  <option value="Pending">Pending</option>
+                  <option value="Processing">Processing</option>
+                  <option value="Shipped">Shipped</option>
+                  <option value="Delivered">Delivered</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </td>
+              <td>{{ order.createdAt ? (order.createdAt | date:'medium') : 'N/A' }}</td>
+              <td>
+                <button class="btn btn-sm btn-primary" (click)="updateOrderStatus(order._id, order.status)"
+                  [disabled]="!order.status">Save</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

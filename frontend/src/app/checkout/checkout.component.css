@@ -1,0 +1,252 @@
+/* ============ NAVBAR ============ */
+.navbar {
+  padding: 0.2rem 2rem;
+  min-height: 48px;
+  background-color: #212529 !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.highlight {
+  color: #d9534f;
+  font-weight: bold;
+}
+
+
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff !important;
+  text-decoration: none;
+  padding: 0.2rem 0.8rem;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin-left: 1.5rem;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  color: #ffffff !important;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0.2rem 0.8rem;
+}
+
+.nav-link:hover {
+  color: #4a90e2 !important;
+}
+
+.logout-link:hover {
+  color: #e63946 !important;
+}
+
+/* ============ PAGE BACKGROUND ============ */
+.checkout-page-background {
+  background: url('/assets/images/signin.jpg') ;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+}
+
+
+.checkout-page-background {
+  background: #f4f6f9 url('https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+}
+
+
+/* ============ CHECKOUT CONTAINER ============ */
+.checkout-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  margin: 5rem auto 2rem;
+  padding: 3rem;
+  width: 95%;
+  max-width: 1000px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============ FORM AND TABLE STYLES ============ */
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-table th, .order-table td {
+  padding: 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.order-table th {
+  background-color: #1a1a1a;
+  color: #fff;
+  font-weight: 600;
+}
+
+.total-amount {
+  text-align: right;
+  color: #4a90e2;
+}
+
+h2, h4 {
+  text-align: center;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.alert-success {
+  background: rgba(40, 167, 69, 0.1);
+  border: 1px solid #28a745;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.btn-continue, .btn-place-order {
+  background-color: #4a90e2;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-continue:hover, .btn-place-order:hover {
+  background-color: #357abd;
+  transform: translateY(-2px);
+}
+
+.btn-place-order {
+  padding: 12px;
+  width: 100%;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.btn-place-order:disabled {
+  background-color: #7f8c8d;
+  cursor: not-allowed;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  border: 1px solid #d1d1d1;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+  outline: none;
+}
+
+.form-control.is-invalid {
+  border-color: #e63946;
+}
+
+.invalid-feedback {
+  color: #e63946;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.form-control.is-invalid ~ .invalid-feedback {
+  opacity: 1;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.form-label i {
+  color: #4a90e2;
+  margin-right: 8px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-brand {
+    font-size: 1.1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .nav-item {
+    margin: 0.5rem 0;
+  }
+
+  .checkout-container {
+    padding: 1.5rem;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .col-md-6 {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+}

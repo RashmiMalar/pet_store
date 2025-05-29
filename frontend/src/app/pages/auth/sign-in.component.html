@@ -1,0 +1,17 @@
+<div class="auth-container">
+  <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+    <h2>Login</h2>
+
+    <input type="text" formControlName="username" placeholder="Email" />
+    <div *ngIf="form.controls.username.invalid && form.controls.username.touched" class="error">
+      Email is required.
+    </div>
+
+    <input type="password" formControlName="password" placeholder="Password" />
+    <div *ngIf="form.controls.password.invalid && form.controls.password.touched" class="error">
+      Password is required.
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Login</button>
+  </form>
+</div>

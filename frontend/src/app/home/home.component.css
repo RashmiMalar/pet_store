@@ -1,0 +1,185 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.hero {
+  height: 100vh;
+  background: url('/assets/images/hero_back.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.hero-content {
+  margin-top: -180px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #f1f1f1;
+}
+
+.btn-outline-light:hover {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+.btn-warning {
+  margin-left: 10px;
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
+.category-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  background-color: #444 !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.navbar-brand {
+  font-size: 1.6rem;
+}
+
+/* Section Headings */
+section h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+/* Cards */
+.card {
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  height: 250px;
+  object-fit: cover;
+}
+
+.styled-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  display: block;
+}
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #cca817; /* Green background */
+  color: #fff; /* White text for contrast */
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 1000; /* Ensure it stays above other content */
+  font-size: 1.5rem;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  background-color: #cca817; /* Darker green on hover */
+  transform: translateY(-3px);
+}
+
+/* Profile Section Styles */
+.nav-tabs .nav-link {
+  color: #555;
+  font-weight: 500;
+  border: none;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-tabs .nav-link.active {
+  color: #cca817;
+  border-bottom: 2px solid #cca817;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #cca817;
+}
+
+.card-body h5 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.form-control:focus {
+  border-color: #cca817;
+  box-shadow: 0 0 5px rgba(204, 168, 23, 0.3);
+  outline: none;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #333;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}

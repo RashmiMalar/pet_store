@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm rounded">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Paws n' Purrs</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/home']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/product-list']">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/cart']">Cart</a>
+        </li>
+      </ul>
+      <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5">
+  <h2 class="mb-4 fade-in">Order History</h2>
+
+  <div class="row mb-3 fade-in">
+    <div class="col-md-4">
+      <select class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+        <option value="">All Statuses</option>
+        <option value="Delivered">Delivered</option>
+        <option value="Pending">Pending</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-outline-secondary" (click)="sortDirection = sortDirection === 'asc' ? 'desc' : 'asc'; applyFilters()">
+        Sort by Date ({{ sortDirection === 'asc' ? 'Oldest' : 'Newest' }})
+      </button>
+    </div>
+    <div class="col-md-4 text-end">
+      <button class="btn btn-danger" (click)="exportAllToPDF()">Export All to PDF</button>
+    </div>
+  </div>
+
+  <div *ngIf="filteredOrders.length === 0" class="alert alert-info fade-in">
+    No matching orders found.
+  </div>
+
+  <div id="order-summary">
+    <div *ngFor="let order of filteredOrders" class="card mb-4 fade-in" [id]="'invoice-' + order.orderNumber">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+          <strong>Order #{{ order.orderNumber }}</strong> - {{ order.createdAt | date: 'medium' }}
+        </div>
+        <button class="btn btn-sm btn-primary" (click)="downloadInvoice(order)">Download Invoice</button>
+      </div>
+      <div class="card-body">
+        <h5>Status: <span class="badge bg-success">{{ order.status }}</span></h5>
+
+        <div *ngIf="order.customerDetails" class="mt-2">
+          <h6>Customer Details:</h6>
+          <p>
+            Name: {{ order.customerDetails.name }}<br>
+            Address: {{ order.customerDetails.address }}<br>
+            Phone: {{ order.customerDetails.phone }}
+          </p>
+        </div>
+
+        <h6>Items:</h6>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order.cartItems">
+                <td>{{ item.name }}</td>
+                <td>{{ item.price | currency: 'INR' }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price * item.quantity | currency: 'INR' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5 class="text-end">Total: {{ order.amount | currency: 'INR' }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

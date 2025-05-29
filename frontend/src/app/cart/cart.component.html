@@ -1,0 +1,51 @@
+<div class="cart-page-background">
+  <div class="navbar">
+    <div class="navbar-links">
+      <a (click)="goToHome()">Home</a>
+      <a (click)="goToProducts()">Products</a>
+      <a (click)="logout()" class="logout-link">Logout</a>
+    </div>
+  </div>
+
+  <div class="cart-container">
+    <h2>Your Cart</h2>
+    <div *ngIf="cartItems.length === 0" class="alert alert-info">
+      Your cart is empty.
+    </div>
+    <div *ngIf="cartItems.length > 0">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems">
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.price | currency:'INR' }}</td>
+            <td>
+              <div class="qty-control">
+                <button class="qty-btn" (click)="decrementQuantity(item.product._id)">-</button>
+                <span>{{ item.quantity }}</span>
+                <button class="qty-btn" (click)="incrementQuantity(item.product._id)">+</button>
+              </div>
+            </td>
+            <td>{{ (item.product.price * item.quantity) | currency:'INR' }}</td>
+            <td>
+              <button class="remove-btn" (click)="removeItem(item.product._id)">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="total-section">
+        <h4>Total: {{ getTotalPrice() | currency:'INR' }}</h4>
+        <button class="clear-btn" (click)="clearCart()">Clear Cart</button>
+        <button class="checkout-btn" (click)="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>

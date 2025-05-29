@@ -1,0 +1,104 @@
+<div class="profile-wrapper">
+  <div class="profile-container">
+    <div class="header">
+      <button (click)="goBackToHome()" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</button>
+      <h2>User Profile</h2>
+    </div>
+    <div class="tab-buttons">
+      <button [class.active]="activeTab === 'info'" (click)="activeTab = 'info'">Personal Info</button>
+      <button [class.active]="activeTab === 'wishlist'" (click)="activeTab = 'wishlist'">Wishlist</button>
+      <button [class.active]="activeTab === 'orders'" (click)="activeTab = 'orders'">Orders</button>
+    </div>
+
+    <!-- Personal Info Tab -->
+    <div *ngIf="activeTab === 'info'" class="tab-content" @fadeIn>
+      <h3>Personal Information</h3>
+      <div *ngIf="!isEditing" class="profile-details">
+        <p><strong>First Name:</strong> {{ userProfile.firstName }}</p>
+        <p><strong>Last Name:</strong> {{ userProfile.lastName }}</p>
+        <p><strong>Gender:</strong> {{ userProfile.gender }}</p>
+        <p><strong>Mobile Number:</strong> {{ userProfile.mobileNumber }}</p>
+        <button (click)="startEditing()" class="edit-button">Edit Profile</button>
+      </div>
+      <div *ngIf="isEditing" class="profile-form">
+        <form [formGroup]="profileForm" (ngSubmit)="updateProfile()"> 
+          <!-- reactive form for profile editing -->
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input id="firstName" formControlName="firstName" placeholder="Enter first name">
+            <div *ngIf="profileForm.get('firstName')?.touched && profileForm.get('firstName')?.invalid" class="error">
+              <div *ngIf="profileForm.get('firstName')?.errors?.['required']">First name is required.</div>
+              <div *ngIf="profileForm.get('firstName')?.errors?.['minlength']">First name must be at least 2 characters.</div>
+              <div *ngIf="profileForm.get('firstName')?.errors?.['maxlength']">First name cannot exceed 50 characters.</div>
+              <div *ngIf="profileForm.get('firstName')?.errors?.['lettersOnly']">First name must contain only letters, spaces, or hyphens.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input id="lastName" formControlName="lastName" placeholder="Enter last name">
+            <div *ngIf="profileForm.get('lastName')?.touched && profileForm.get('lastName')?.invalid" class="error">
+              <div *ngIf="profileForm.get('lastName')?.errors?.['minlength']">Last name must be at least 2 characters.</div>
+              <div *ngIf="profileForm.get('lastName')?.errors?.['maxlength']">Last name cannot exceed 50 characters.</div>
+              <div *ngIf="profileForm.get('lastName')?.errors?.['lettersOnly']">Last name must contain only letters, spaces, or hyphens.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" formControlName="gender">
+              <option value="">Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <div *ngIf="profileForm.get('gender')?.touched && profileForm.get('gender')?.errors?.['required']" class="error">
+              Please select a gender.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="mobileNumber">Mobile Number:</label>
+            <input id="mobileNumber" formControlName="mobileNumber" placeholder="Enter mobile number">
+            <div *ngIf="profileForm.get('mobileNumber')?.touched && profileForm.get('mobileNumber')?.invalid" class="error">
+              <div *ngIf="profileForm.get('mobileNumber')?.errors?.['required']">Mobile number is required.</div>
+              <div *ngIf="profileForm.get('mobileNumber')?.errors?.['pattern']">Mobile number must be exactly 10 digits and not start with 0.</div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" [disabled]="profileForm.invalid" class="save-button">Save</button>
+            <button type="button" (click)="isEditing = false" class="cancel-button">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Wishlist Tab -->
+    <div *ngIf="activeTab === 'wishlist'" class="tab-content" @fadeIn>
+      <h3>Wishlist</h3>
+      <div *ngIf="wishlist.length === 0" class="empty-message">
+        <p>Your wishlist is empty.</p>
+      </div>
+      <div class="wishlist-grid">
+        <div *ngFor="let item of wishlist" class="wishlist-item">
+          <p><strong>{{ item.name }}</strong></p>
+          <p>Price: ${{ item.price }}</p>
+          <p>Added on: {{ item.addedAt | date }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders Tab -->
+    <div *ngIf="activeTab === 'orders'" class="tab-content" @fadeIn>
+      <h3>Order History</h3>
+      <div *ngIf="orders.length === 0" class="empty-message">
+        <p>You have no orders.</p>
+      </div>
+      <div class="order-grid">
+        <div *ngFor="let order of orders" class="order-item">
+          <p><strong>Order #{{ order.orderNumber }}</strong></p>
+          <p>Status: {{ order.status }}</p>
+          <p>Amount: ${{ order.amount }}</p>
+          <p>Placed on: {{ order.createdAt | date }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
