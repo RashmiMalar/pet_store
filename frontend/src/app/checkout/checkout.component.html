@@ -1,0 +1,123 @@
+<div class="checkout-page-background">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/home">Paws 'n Purrs</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" routerLink="/home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/product-list">Products</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/cart">Cart</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/order-history">Order History</a></li>
+          <li class="nav-item"><a class="nav-link" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="checkout-container">
+    <div *ngIf="thankYouMessage" class="alert-success">
+      <h4>{{ thankYouMessage }}</h4>
+      <button class="btn-continue" (click)="continueShopping()">Continue Shopping</button>
+    </div>
+
+    <div *ngIf="!thankYouMessage">
+      <h2>Checkout</h2>
+      <div class="row">
+        <!-- Order Summary -->
+        <div class="col-md-6">
+          <h4>Order Summary</h4>
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of cartItems">
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.product.price | currency:'INR' }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ (item.product.price * item.quantity) | currency:'INR' }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="total-amount">Total: {{ totalAmount | currency:'INR' }}</h4>
+        </div>
+
+        <!-- Customer Details and UPI Form -->
+        <div class="col-md-6">
+          <h4>Delivery & Payment Details</h4>
+          <form [formGroup]="checkoutForm" (ngSubmit)="placeOrder()">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                [class.is-invalid]="checkoutForm.get('name')?.touched && checkoutForm.get('name')?.invalid"
+              >
+              <div *ngIf="checkoutForm.get('name')?.touched && checkoutForm.get('name')?.hasError('required')" class="invalid-feedback">
+                Name is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address">Delivery Address</label>
+              <textarea
+                class="form-control"
+                id="address"
+                formControlName="address"
+                [class.is-invalid]="checkoutForm.get('address')?.touched && checkoutForm.get('address')?.invalid"
+              ></textarea>
+              <div *ngIf="checkoutForm.get('address')?.touched && checkoutForm.get('address')?.hasError('required')" class="invalid-feedback">
+                Address is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                formControlName="phone"
+                [class.is-invalid]="checkoutForm.get('phone')?.touched && checkoutForm.get('phone')?.invalid"
+              >
+              <div class="input-hint" *ngIf="checkoutForm.get('phone')?.valid && checkoutForm.get('phone')?.value">
+                {{ checkoutForm.get('phone')?.value | phoneFormat }}
+              </div>
+              <div *ngIf="checkoutForm.get('phone')?.touched && checkoutForm.get('phone')?.hasError('required')" class="invalid-feedback">
+                Phone number is required.
+              </div>
+              <div *ngIf="checkoutForm.get('phone')?.touched && checkoutForm.get('phone')?.hasError('pattern')" class="invalid-feedback">
+                Please enter a valid 10-digit phone number.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="upiId">
+                <i class="fas fa-credit-card"></i> UPI ID
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="upiId"
+                formControlName="upiId"
+                placeholder="user@upi"
+                [class.is-invalid]="checkoutForm.get('upiId')?.touched && checkoutForm.get('upiId')?.invalid"
+              >
+              <div *ngIf="checkoutForm.get('upiId')?.touched && checkoutForm.get('upiId')?.hasError('required')" class="invalid-feedback">
+                UPI ID is required.
+              </div>
+              <div *ngIf="checkoutForm.get('upiId')?.touched && checkoutForm.get('upiId')?.hasError('pattern')" class="invalid-feedback">
+                Please enter a valid UPI ID.
+              </div>
+            </div>
+            <button type="submit" class="btn-place-order" [disabled]="checkoutForm.invalid">Place Order</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

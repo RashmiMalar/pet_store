@@ -1,0 +1,112 @@
+<div class="page-container">
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-brand"><h1>Paws & Purrs</h1></div>
+    <div class="navbar-links"><a [routerLink]="['/home']">Home</a></div>
+  </nav>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <input type="text" [(ngModel)]="searchText" (input)="filterProducts()" placeholder="Search products..." />
+      <select [(ngModel)]="selectedCategory" (change)="filterProducts()">
+        <option value="all">All Categories</option>
+        <option value="food">Food</option>
+        <option value="toys">Toys</option>
+        <option value="accessories">Accessories</option>
+      </select>
+      <select [(ngModel)]="sortOption" (change)="sortProducts()">
+        <option value="default">Sort By</option>
+        <option value="a-z">Name (A-Z)</option>
+        <option value="z-a">Name (Z-A)</option>
+        <option value="price-asc">Price (Low to High)</option>
+        <option value="price-desc">Price (High to Low)</option>
+      </select>
+    </div>
+    <div class="toolbar-right">
+      <button class="cart-button" [routerLink]="['/cart']">
+        <i class="fas fa-shopping-cart"></i> Cart ({{ getTotalItemsInCart() }})
+      </button>
+    </div>
+  </div>
+
+  <!-- Cart Message -->
+  <div *ngIf="cartMessage" class="cart-message">{{ cartMessage }}</div>
+
+  <!-- Wishlist Message -->
+  <div *ngIf="wishlistMessage" class="wishlist-message">{{ wishlistMessage }}</div>
+
+  <!-- Product Grid -->
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of filteredProducts">
+      <div class="wishlist-icon" (click)="toggleWishlist(product)">
+        <i class="fas fa-star" [ngClass]="{'in-wishlist': isInWishlist(product._id)}"></i>
+      </div>
+      <img *ngIf="getProductImageSrc(product)" [src]="getProductImageSrc(product)"
+           alt="{{ product.name }}" class="product-image" loading="lazy" />
+      <span *ngIf="!getProductImageSrc(product)" class="no-image">No Image</span>
+      <h3>{{ product.name }}</h3>
+      <p class="price">₹{{ product.price }}</p>
+      
+      <!-- Stock Availability -->
+      <p class="stock">
+        Stock: 
+        <span *ngIf="product.stock > 0">{{ product.stock }}</span>
+        <span *ngIf="product.stock === 0" class="out-of-stock">Out of Stock</span>
+        <span *ngIf="isLowStock(product.stock)" class="low-stock-badge">⚠ Only {{ product.stock }} left!</span>
+      </p>
+
+      <div class="cart-controls">
+        <ng-container *ngIf="isInCart(product._id); else addBtn">
+          <div class="cart-item-info">
+            <span class="item-name">{{ product.name }}</span>
+            <span class="item-price">₹{{ product.price }}</span>
+          </div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" (click)="decrementQuantity(product._id)">−</button>
+            <span class="quantity">{{ getQuantity(product._id) }}</span>
+            <button class="quantity-btn" (click)="incrementQuantity(product._id)">+</button>
+          </div>
+          <button class="remove-btn" (click)="removeFromCart(product._id)">Remove</button>
+        </ng-container>
+        <ng-template #addBtn>
+          <button class="add-to-cart-button" (click)="addToCart(product)" [disabled]="product.stock === 0">
+            Add to Cart
+          </button>
+        </ng-template>
+      </div>
+
+      <button class="view-details-button" (click)="viewDetails(product)">View Details</button>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="products.length > itemsPerPage">
+    <button class="pagination-btn" (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button class="pagination-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+
+  <!-- Modal Backdrop & Content -->
+  <div
+    class="modal-backdrop"
+    *ngIf="showModal"
+    (click)="closeModal()"
+  >
+    <div
+      class="modal-content"
+      (click)="$event.stopPropagation()"
+    >
+      <h2>{{ selectedProduct?.name }}</h2>
+      <p>{{ selectedProduct?.description }}</p>
+      <p>Category: {{ selectedProduct?.category }}</p>
+      <p>Price: ₹{{ selectedProduct?.price }}</p>
+      <p>Seller: {{ selectedProduct?.seller }}</p>
+      <p>Stock: 
+        <span *ngIf="selectedProduct && selectedProduct.stock > 0">{{ selectedProduct.stock }}</span>
+        <span *ngIf="selectedProduct?.stock === 0" class="out-of-stock">Out of Stock</span>
+      </p>
+      <button class="close-button" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>

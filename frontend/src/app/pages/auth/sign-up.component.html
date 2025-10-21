@@ -1,0 +1,27 @@
+<div class="auth-container">
+  <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+    <h2>Create Account</h2>
+
+    <input type="text" formControlName="name" placeholder="Username" />
+    <div *ngIf="form.controls.name.invalid && form.controls.name.touched" class="error">
+      {{ form.controls.name.errors?.['backend'] || form.controls.name.errors?.['invalidUsername'] || 'Username is required.' }}
+    </div>
+
+    <input type="email" formControlName="email" placeholder="Email" />
+    <div *ngIf="form.controls.email.invalid && form.controls.email.touched" class="error">
+      {{ form.controls.email.errors?.['backend'] || 'Enter a valid email.' }}
+    </div>
+
+    <input type="password" formControlName="password" placeholder="Password" />
+    <div *ngIf="form.controls.password.invalid && form.controls.password.touched" class="error">
+      {{ form.controls.password.errors?.['backend']|| form.controls.password.errors?.['weakPassword'] || 'Password is required.' }}
+    </div>
+
+    <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+    <div *ngIf="form.errors?.['passwordsMismatch'] && form.controls.confirmPassword.touched" class="error">
+      {{ form.errors?.['passwordsMismatch'] }}
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Register</button>
+  </form>
+</div>

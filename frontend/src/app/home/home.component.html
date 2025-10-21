@@ -1,0 +1,241 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <img src="favicon.png" alt="Logo" width="30" height="30" class="me-2" />
+    <a class="navbar-brand" routerLink="/">PAWS 'N PURRS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav me-3">
+        <li class="nav-item"><a class="nav-link" (click)="scrollToSection('home')">Home</a></li>
+        <li class="nav-item"><a class="nav-link" (click)="scrollToSection('about')">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" (click)="scrollToSection('categories')">Categories</a></li>
+        <li class="nav-item"><a class="nav-link" (click)="scrollToSection('footer')">Contact</a></li>
+        <li class="nav-item" *ngIf="isLoggedIn"><a class="nav-link" routerLink="/profile">My Profile</a></li>
+      </ul>
+      <div class="d-flex">
+        <ng-container *ngIf="!isLoggedIn">
+          <button class="btn btn-outline-light me-2" (click)="toggleLogin()">
+            Sign In
+          </button>
+          <a routerLink="/register" class="btn btn-warning">Sign Up</a>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn">
+          <button class="btn btn-outline-light me-2" (click)="toggleLogin()">
+            Sign Out
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero d-flex align-items-center justify-content-center text-center" id="home">
+  <div class="hero-content">
+    <h1 class="hero-title">Welcome to PAWS 'N PURRS</h1>
+    <p class="hero-subtitle">Your one-stop shop for all your pet's needs</p>
+    <button class="btn btn-warning mt-3" (click)="navigateTo('product-list')">Shop Now</button>
+  </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about" class="py-5 bg-white text-center">
+  <div class="container">
+    <h2 class="section-title">About Us</h2>
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <p class="lead">We care for your pets like family. From nutritious food to playful toys, comfy beds, and grooming essentials, PAWS n' PURRS is dedicated to providing top-quality products for your furry friends!</p>
+      </div>
+      <div class="col-md-6">
+        <img src="assets/images/guineas.jpg" alt="PAWS n' PURRS" class="round-image styled-image" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="assets/images/foods/pedigree.jpg" class="card-img-top" alt="Premium Dog Food">
+          <div class="card-body">
+            <h5 class="card-title">Premium Dog Food</h5>
+            <p class="card-text">Nutritious meal for your dog’s health.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="assets/images/foods/beds.png" class="card-img-top" alt="Luxury Pet Bed">
+          <div class="card-body">
+            <h5 class="card-title">Luxury Pet Bed</h5>
+            <p class="card-text">Cozy and comfortable for your pet.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="assets/images/foods/shampoo.png" class="card-img-top" alt="Pet Shampoo">
+          <div class="card-body">
+            <h5 class="card-title">Pet Shampoo</h5>
+            <p class="card-text">Gentle grooming for shiny coats.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section id="categories" class="py-5 bg-dark text-white">
+  <div class="container text-center">
+    <h2 class="section-title">Product Categories</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" (click)="navigateTo('product-list')" style="cursor: pointer;">
+        <div class="card h-100 bg-secondary text-white category-card">
+          <img src="assets/images/food.jpg" class="card-img-top" alt="Pet Food">
+          <div class="card-body">
+            <h5 class="card-title">Pet Food</h5>
+            <p class="card-text">Healthy and tasty meals for your pets.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" (click)="navigateTo('product-list')" style="cursor: pointer;">
+        <div class="card h-100 bg-secondary text-white category-card">
+          <img src="assets/images/access.jpg" class="card-img-top" alt="Pet Accessories">
+          <div class="card-body">
+            <h5 class="card-title">Accessories</h5>
+            <p class="card-text">Leashes, collars, beds and more.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" (click)="navigateTo('product-list')" style="cursor: pointer;">
+        <div class="card h-100 bg-secondary text-white category-card">
+          <img src="assets/images/groom.jpg" class="card-img-top" alt="Grooming">
+          <div class="card-body">
+            <h5 class="card-title">Grooming</h5>
+            <p class="card-text">Top grooming products for your pets.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pet Care Tips Section -->
+<section class="py-5 bg-white">
+  <div class="container text-center">
+    <h2 class="section-title">Pet Care Tips</h2>
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="assets/images/hify.jpg" alt="Pet Care Tips" class="img-fluid mb-3 styled-image" />
+      </div>
+      <div class="col-md-6">
+        <ul class="list-unstyled text-left">
+          <li class="mb-2"><strong>Regular Feeding:</strong> Feed your pet balanced meals twice daily.</li>
+          <li class="mb-2"><strong>Grooming:</strong> Brush your pet’s coat weekly for a healthy shine.</li>
+          <li class="mb-2"><strong>Vet Visits:</strong> Schedule annual check-ups for your pet’s health.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="section-title">Gallery</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <img src="assets/images/dog.jpg" alt="Happy Dog" class="img-fluid styled-image" />
+      </div>
+      <div class="col-md-4 mb-4">
+        <img src="assets/images/fish.jpg" alt="Playful Cat" class="img-fluid styled-image" />
+      </div>
+      <div class="col-md-4 mb-4">
+        <img src="assets/images/rabbit.jpg" alt="Cute Rabbit" class="img-fluid styled-image" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Special Offers Section -->
+<section class="py-5 bg-dark text-white">
+  <div class="container text-center">
+    <h2 class="section-title">Special Offers</h2>
+    <p class="lead mb-4">Get 20% off on all pet food this week!</p>
+    <button class="btn btn-warning" (click)="navigateTo('product-list')">Shop Now</button>
+  </div>
+</section>
+
+<!-- Customer Reviews -->
+<section id="customer-reviews" class="py-5 bg-white text-center">
+  <div class="container">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="testimonial-card">
+          <p>"PAWS n' PURRS has been a lifesaver! My dog loves their food, and the toys keep her busy for hours."</p>
+          <p class="font-weight-bold">- Emma R.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="testimonial-card">
+          <p>"The quality of their pet accessories is top-notch. I trust PAWS n' PURRS for all my pet's needs!"</p>
+          <p class="font-weight-bold">- John D.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="testimonial-card">
+          <p>"Fantastic service! My cat loves her new bed!"</p>
+          <p class="font-weight-bold">- Sarah W.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer" class="bg-dark text-white py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5>About PAWS n' PURRS</h5>
+        <p>We are your trusted partner in pet care. Providing top-quality food, toys, grooming products, and accessories.</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Contact Us</h5>
+        <p><strong>Address:</strong> 123 Pet Street, Animal Town, India</p>
+        <p><strong>Email:</strong> supportpawsnpurrs.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a class="text-white text-decoration-none" (click)="scrollToSection('home')">Home</a></li>
+          <li><a class="text-white text-decoration-none" (click)="scrollToSection('about')">About Us</a></li>
+          <li><a class="text-white text-decoration-none" (click)="scrollToSection('categories')">Categories</a></li>
+          <li><a class="text-white text-decoration-none" (click)="scrollToSection('footer')">Contact</a></li>
+        </ul>
+        <h5 class="mt-3">Follow Us</h5>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com" target="_blank" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com" target="_blank" class="text-white"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="bg-secondary" />
+    <p class="text-center mb-0">© 2025 PAWS n' PURRS. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" (click)="scrollToSection('home')" [ngClass]="{'show': showBackToTop}">
+  <i class="fas fa-arrow-up"></i>
+</button>
