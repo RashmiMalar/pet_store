@@ -1,0 +1,78 @@
+# ----- Node/npm -----
+# Ignore dependency folders (global and per-project)
+node_modules/
+**/node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ----- Environment & secrets -----
+# Environment files containing secrets or credentials
+.env
+*.env
+backend/config/config.env
+frontend/.env
+
+# Private keys and certificates
+*.pem
+*.key
+*.crt
+
+# secret files
+secrets.json
+credentials/
+
+# ----- OS & Editor -----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.user
+*.userprefs
+*.iml
+*.sublime-workspace
+*.sublime-project
+*.swp
+
+# ----- Build / output -----
+# General build folders
+dist/
+build/
+out/
+public/build/
+
+# Next / Angular / other frameworks
+.next/
+.angular/
+
+# Frontend specific
+frontend/dist/
+frontend/build/
+frontend/.angular/
+frontend/coverage/
+frontend/coverage-final.json
+
+# Backend specific
+backend/dist/
+backend/build/
+
+# ----- Caches -----
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+.nyc_output/
+
+# ----- Test output -----
+coverage/
+coverage-final.json
+
+# ----- Misc -----
+*.log
+*.tsbuildinfo
+ 
+
